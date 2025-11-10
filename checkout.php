@@ -4,6 +4,16 @@ require_once 'includes/functions.php';
 
 require_login();
 
+// Initialize blockchain (with error handling)
+try {
+    require_once 'includes/blockchain.php';
+    $blockchain = new Blockchain($conn);
+    $blockchain->createGenesisBlock();
+} catch (Exception $e) {
+    error_log("Blockchain initialization error: " . $e->getMessage());
+    $blockchain = null;
+}
+
 $page_title = 'Checkout - ' . SITE_NAME;
 $user_id = $_SESSION['user_id'];
 
@@ -190,10 +200,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                 $clear_stmt->close();
             }
             
+            // Add order to blockchain (if available)
+            $blockchain_message = '';
+            if ($blockchain !== null) {
+                try {
+                    $blockchain_data = [
+                        'order_id' => $order_id,
+                        'user_id' => $user_id,
+                        'total_amount' => $total,
+                        'payment_method' => $payment_method,
+                        'status' => 'Pending',
+                        'items_count' => count($cart_items),
+                        'created_at' => date('Y-m-d H:i:s')
+                    ];
+                    $blockchain->addOrderBlock($order_id, $blockchain_data);
+                    $blockchain_message = ' (Secured on Blockchain)';
+                } catch (Exception $e) {
+                    error_log("Blockchain order addition error: " . $e->getMessage());
+                }
+            }
+            
             // Commit transaction
             $conn->commit();
             
-            set_message('success', 'Order placed successfully! Order ID: #' . $order_id);
+            set_message('success', 'Order placed successfully! Order ID: #' . $order_id . $blockchain_message);
             redirect('profile.php');
             
         } catch (Exception $e) {

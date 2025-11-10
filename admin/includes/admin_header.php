@@ -42,6 +42,9 @@ if (!isset($page_title)) {
                 <a href="<?php echo SITE_URL; ?>/admin/users.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="bi bi-people"></i> Users
                 </a>
+                <a href="<?php echo SITE_URL; ?>/admin/blockchain.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="bi bi-diagram-3"></i> Blockchain
+                </a>
                 <a href="<?php echo SITE_URL; ?>/index.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="bi bi-house"></i> Back to Store
                 </a>

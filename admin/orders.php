@@ -6,6 +6,15 @@ require_admin();
 
 $page_title = 'Manage Orders - Admin Panel';
 
+// Initialize blockchain (with error handling)
+try {
+    require_once '../includes/blockchain.php';
+    $blockchain = new Blockchain($conn);
+} catch (Exception $e) {
+    error_log("Blockchain initialization error: " . $e->getMessage());
+    $blockchain = null;
+}
+
 // Handle order status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
@@ -18,7 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
         $stmt->bind_param("si", $status, $order_id);
         
         if ($stmt->execute()) {
-            set_message('success', 'Order status updated successfully');
+            // Update blockchain (if available)
+            $blockchain_message = '';
+            if ($blockchain !== null) {
+                try {
+                    $blockchain->updateOrderStatus($order_id, $status);
+                    $blockchain_message = ' (Blockchain Updated)';
+                } catch (Exception $e) {
+                    error_log("Blockchain update error: " . $e->getMessage());
+                }
+            }
+            set_message('success', 'Order status updated successfully' . $blockchain_message);
         } else {
             set_message('error', 'Failed to update order status');
         }
@@ -192,8 +211,29 @@ include 'includes/admin_header.php';
                                                 <div class="mb-2">
                                                     <strong>Status:</strong> <span class="badge <?php echo $badge_class; ?>"><i class="bi <?php echo $icon; ?> me-1"></i><?php echo $order['status']; ?></span>
                                                 </div>
-                                                <div>
+                                                <div class="mb-2">
                                                     <strong>Payment:</strong> <?php echo htmlspecialchars($order['payment_method']); ?>
+                                                </div>
+                                                <div>
+                                                    <?php
+                                                    if ($blockchain !== null) {
+                                                        try {
+                                                            $blockchain_block = $blockchain->getOrderBlock($order['id']);
+                                                            if ($blockchain_block): ?>
+                                                                <strong>Blockchain:</strong> 
+                                                                <span class="badge bg-success">
+                                                                    <i class="bi bi-shield-check"></i> Secured
+                                                                </span>
+                                                                <small class="text-muted d-block">Block #<?php echo $blockchain_block['block_index']; ?></small>
+                                                            <?php else: ?>
+                                                                <strong>Blockchain:</strong> 
+                                                                <span class="badge bg-secondary">Not Recorded</span>
+                                                            <?php endif;
+                                                        } catch (Exception $e) {
+                                                            // Silently fail if blockchain not available
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
