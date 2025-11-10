@@ -1,0 +1,676 @@
+/* Admin Panel Styles */
+
+/* Import Montserrat Font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#wrapper {
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    margin-left: 0;
+    transition: margin 0.25s ease-out;
+    flex-shrink: 0;
+    position: relative;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    flex: 1;
+    min-width: 0;
+    overflow-x: hidden;
+    width: calc(100% - 250px);
+}
+
+.list-group-item {
+    border: none;
+    padding: 1rem 1.5rem;
+}
+
+.list-group-item i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+/* Stats Cards */
+.card {
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: none;
+}
+
+/* Dashboard Stats Cards */
+.card.bg-primary,
+.card.bg-success,
+.card.bg-info,
+.card.bg-warning {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, #0056b3 100%) !important;
+    border: none;
+}
+
+.card.bg-success {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
+}
+
+.card.bg-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #117a8b 100%) !important;
+}
+
+.card.bg-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%) !important;
+}
+
+/* Stats Card Body */
+.card.bg-primary .card-body,
+.card.bg-success .card-body,
+.card.bg-info .card-body,
+.card.bg-warning .card-body {
+    padding: 1rem;
+}
+
+/* Stats Card Icon */
+.card .display-4 {
+    opacity: 0.3;
+    font-size: 2.5rem;
+}
+
+/* Stats Card Text */
+.card h6 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/* Stats Card Footer Links */
+.card-footer {
+    padding: 0 1rem 0.35rem 1rem;
+    margin-top: -0.25rem;
+}
+
+.card-footer a {
+    display: inline-block;
+    font-size: 0.75rem;
+}
+
+/* Stats Card Small Text */
+.card small {
+    font-size: 0.65rem;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Ensure cards don't overflow */
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.col-md-3, .col-md-4, .col-md-6, .col-md-8, .col-lg-4, .col-lg-8 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+/* Table Styles */
+.table-responsive {
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #495057;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Fix button spacing in tables */
+.table .btn {
+    margin: 0 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: -250px;
+        position: fixed;
+        z-index: 1000;
+    }
+    
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: 0;
+    }
+    
+    #page-content-wrapper {
+        width: 100%;
+        padding: 0;
+    }
+    
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .col-md-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* Responsive buttons on mobile */
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    
+    .d-flex.justify-content-between h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .d-flex.justify-content-between .btn {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Tablet and smaller desktop */
+@media (max-width: 1200px) {
+    .col-md-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Sidebar Toggle Button */
+#sidebarToggle {
+    border-radius: 5px;
+    display: none; /* Hidden on desktop */
+}
+
+/* Show toggle button only on mobile */
+@media (max-width: 768px) {
+    #sidebarToggle {
+        display: block;
+    }
+}
+
+/* Modal Styles - Enhanced UI */
+.modal {
+    z-index: 1055 !important;
+    padding: 0 !important;
+}
+
+.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 650px;
+    width: 100%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 250px;
+    padding-right: 2rem;
+}
+
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    border: none;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease-out;
+    width: 100%;
+    min-width: 500px;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    border-radius: 0;
+    background-color: #343a40;
+    color: white;
+    border-bottom: none;
+    padding: 1.25rem 1.5rem;
+}
+
+.modal-header .modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    background-color: #ffffff;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for modal body */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+}
+
+/* Large modals */
+.modal-lg {
+    max-width: 1000px;
+    padding-left: 250px;
+    padding-right: 2rem;
+}
+
+/* Ensure modals appear above everything */
+.modal.show .modal-dialog {
+    padding-left: 250px;
+    padding-right: 2rem;
+}
+
+.modal.show .modal-lg {
+    padding-left: 250px;
+    padding-right: 2rem;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+/* Modal form enhancements */
+.modal-body .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.modal-body .form-control,
+.modal-body .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.625rem 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+    border-color: #343a40;
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
+}
+
+.modal-body textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Modal buttons */
+.modal-footer .btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.modal-footer .btn-primary {
+    background-color: #343a40;
+    border: none;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #23272b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 58, 64, 0.4);
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.modal-footer .btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.modal-footer .btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+/* Modal info sections - General */
+.modal-body h6 {
+    color: #343a40;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.modal-body .row {
+    margin-bottom: 1rem;
+}
+
+.modal-body p strong {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Modal tables */
+.modal-body .table {
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.modal-body .table thead {
+    background-color: #f8f9fa;
+}
+
+.modal-body .table thead th {
+    border-bottom: 2px solid #dee2e6;
+    color: #495057;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+}
+
+.modal-body .table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Current image preview in modals */
+.modal-body small.text-muted {
+    display: block;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+}
+
+/* Delete modal warning styles */
+.modal-body .text-danger {
+    background-color: #fff5f5;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border-left: 4px solid #dc3545;
+    margin-top: 1rem;
+}
+
+.modal-body .text-warning {
+    background-color: #fffbf0;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+    margin-top: 1rem;
+}
+
+/* Modal badges */
+.modal-body .badge {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+/* User Details Modal - Specific Styling Only */
+#viewUserModal .modal-body h6,
+[id^="viewUserModal"] .modal-body h6 {
+    color: #343a40;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e9ecef;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+#viewUserModal .modal-body h6:first-of-type,
+[id^="viewUserModal"] .modal-body h6:first-of-type {
+    margin-top: 0;
+}
+
+#viewUserModal .modal-body .row.mb-3,
+[id^="viewUserModal"] .modal-body .row.mb-3 {
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1.5rem;
+}
+
+#viewUserModal .modal-body .row.mb-3 .col-md-6,
+[id^="viewUserModal"] .modal-body .row.mb-3 .col-md-6 {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+#viewUserModal .modal-body .row.mb-3 h6,
+[id^="viewUserModal"] .modal-body .row.mb-3 h6 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6c757d;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#viewUserModal .modal-body p,
+[id^="viewUserModal"] .modal-body p {
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+}
+
+#viewUserModal .modal-body p strong,
+[id^="viewUserModal"] .modal-body p strong {
+    display: inline-block;
+    min-width: 140px;
+}
+
+/* User Details - Address section styling */
+#viewUserModal .modal-body h6 + p,
+[id^="viewUserModal"] .modal-body h6 + p {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #343a40;
+    margin-top: 0.5rem;
+}
+
+/* File input styling in modals */
+.modal-body input[type="file"] {
+    padding: 0.5rem;
+    border: 2px dashed #ced4da;
+    background-color: #f8f9fa;
+}
+
+.modal-body input[type="file"]:hover {
+    border-color: #343a40;
+    background-color: #e9ecef;
+}
+
+/* Number input styling */
+.modal-body input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+}
+
+.modal-body input[type="number"]::-webkit-inner-spin-button,
+.modal-body input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 1rem auto !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        min-height: calc(100vh - 2rem);
+        max-width: calc(100% - 2rem);
+    }
+    
+    .modal-content {
+        border-radius: 10px;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .modal-footer {
+        padding: 0.75rem 1rem;
+    }
+    
+    .modal-lg {
+        max-width: calc(100% - 2rem);
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .modal-dialog {
+        max-width: 700px;
+        padding-left: 250px;
+        padding-right: 2rem;
+    }
+    
+    .modal-lg {
+        max-width: 800px;
+        padding-left: 250px;
+        padding-right: 2rem;
+    }
+}
+
+/* Desktop with sidebar adjustments */
+@media (min-width: 1025px) {
+    .modal-dialog {
+        padding-left: 250px;
+        padding-right: 2rem;
+    }
+    
+    .modal-lg {
+        padding-left: 250px;
+        padding-right: 2rem;
+    }
+}
+
+/* Form Styles */
+.form-control, .form-select {
+    border-radius: 5px;
+}
+
+/* Badge Styles */
+.badge {
+    padding: 0.5em 0.8em;
+    font-size: 0.85em;
+}
