@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    redirect('categories.php');
+    redirect('admin/categories.php');
 }
 
 // Get all categories with product count

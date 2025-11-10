@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
         $stmt->close();
     }
     
-    redirect('orders.php');
+    redirect('admin/orders.php');
 }
 
 // Get all orders

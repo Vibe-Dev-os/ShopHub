@@ -20,13 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category_id = intval($_POST['category_id']);
             
             $image_url = '';
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            if (isset($_FILES['image']) && !empty($_FILES['image']['name'])) {
                 $upload_result = upload_image($_FILES['image']);
                 if ($upload_result['success']) {
                     $image_url = $upload_result['filename'];
                 } else {
                     set_message('error', $upload_result['message']);
-                    redirect('products.php');
+                    redirect('admin/products.php');
                 }
             }
             
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->bind_param("ssdissi", $name, $description, $price, $stock, $category_id, $image_url, $product_id);
                 } else {
                     set_message('error', $upload_result['message']);
-                    redirect('products.php');
+                    redirect('admin/products.php');
                 }
             } else {
                 $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock = ?, category_id = ? WHERE id = ?");
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     
-    redirect('products.php');
+    redirect('admin/products.php');
 }
 
 // Get all products
